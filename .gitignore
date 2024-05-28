@@ -1,4 +1,4 @@
-drf_venv/
+drf_-venv/
 db.sqlite3
 __pycache__/
 *.pyc
