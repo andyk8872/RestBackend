@@ -1,12 +1,13 @@
 from django.shortcuts import render
+
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from django.http import Http404
-from rest_framework.views import APIView
-from .serializers import PostSerializer
-from .models import Post
 
+from rest_framework.views import APIView
+from .models import Post
+from .serializers import PostSerializer
 
 
 # Create your views here.
@@ -18,11 +19,13 @@ class PostsAPIView(APIView):
     List all posts, or create a new post.
     """
     def get(self, request):
+        """1"""
         posts = Post.objects.all() #queryset
         serializer = PostSerializer(posts, many=True)
         return Response(serializer.data)
 
     def post(self, request):
+        """2"""
         serializer = PostSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -35,6 +38,7 @@ class postDetailsAPIView(APIView):
     Retrieve, update or delete a snippet instance.
     """
     def get_object(self, pk):
+        """3"""
         try:
             return Post.objects.get(pk=pk)
         except Post.DoesNotExist:
